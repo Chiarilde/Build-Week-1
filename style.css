@@ -1,0 +1,75 @@
+.container {
+    background-image: url("./assets/bg.jpg");
+    width: 100%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+.navbar {
+    width: 100%;
+}
+.navbar img {
+    width: 145px;
+    height: 33px;
+    padding: 3% 5%;
+}
+h1 {
+    color: white;
+    font-family: "Outfit";
+    font-size: 60px;
+}
+h2 {
+    color: #d20094;
+    font-size: 30px;
+    margin: 0;
+}
+h1 span {
+    font-weight: lighter;
+}
+.mainText {
+    display: flex;
+    flex-wrap: wrap;
+    width: 30%;
+    padding: 1% 5%;
+}
+.text {
+    display: flex;
+    flex-wrap: wrap;
+    width: 42%;
+    padding-left: 5%;
+}
+.text p {
+    color: white;
+    font-family: "Inter";
+    font-size: 16px;
+    margin: 0;
+}
+.text ul {
+    color: white;
+    font-family: "Inter";
+    font-size: 16px;
+    margin-top: 8%;
+}
+.footer {
+    display: flex;
+    align-items: center;
+    color: white;
+    padding: 5%;
+    font-family: "Inter";
+    font-size: 16px;
+}
+.footer p {
+    font-size: 12px;
+}
+.btn {
+    width: 180px;
+    height: 53px;
+    background-color: #00ffff;
+    color: black;
+    font-weight: bolder;
+    font-size: 19px;
+    border: none;
+    margin-left: 10%;
+    box-shadow: 0 0 30px rgba(25, 246, 255, 0.9);
+    cursor: pointer;
+}
