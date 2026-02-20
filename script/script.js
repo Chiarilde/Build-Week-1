@@ -1,120 +1,57 @@
-const questions = [
-  {
-    category: "Science: Computers",
-    type: "multiple",
-    difficulty: "easy",
-    question: "What does CPU stand for?",
-    correct_answer: "Central Processing Unit",
-    incorrect_answers: [
-      "Central Process Unit",
-      "Computer Personal Unit",
-      "Central Processor Unit",
-    ],
-  },
-  {
-    category: "Science: Computers",
-    type: "multiple",
-    difficulty: "easy",
-    question:
-      "In the programming language Java, which of these keywords would you put on a variable to make sure it doesn&#039;t get modified?",
-    correct_answer: "Final",
-    incorrect_answers: ["Static", "Private", "Public"],
-  },
-  {
-    category: "Science: Computers",
-    type: "boolean",
-    difficulty: "easy",
-    question: "The logo for Snapchat is a Bell.",
-    correct_answer: "False",
-    incorrect_answers: ["True"],
-  },
-  {
-    category: "Science: Computers",
-    type: "boolean",
-    difficulty: "easy",
-    question:
-      "Pointers were not used in the original C programming language; they were added later on in C++.",
-    correct_answer: "False",
-    incorrect_answers: ["True"],
-  },
-  {
-    category: "Science: Computers",
-    type: "multiple",
-    difficulty: "easy",
-    question:
-      "What is the most preferred image format used for logos in the Wikimedia database?",
-    correct_answer: ".svg",
-    incorrect_answers: [".png", ".jpeg", ".gif"],
-  },
-  {
-    category: "Science: Computers",
-    type: "multiple",
-    difficulty: "easy",
-    question: "In web design, what does CSS stand for?",
-    correct_answer: "Cascading Style Sheet",
-    incorrect_answers: [
-      "Counter Strike: Source",
-      "Corrective Style Sheet",
-      "Computer Style Sheet",
-    ],
-  },
-  {
-    category: "Science: Computers",
-    type: "multiple",
-    difficulty: "easy",
-    question:
-      "What is the code name for the mobile operating system Android 7.0?",
-    correct_answer: "Nougat",
-    incorrect_answers: ["Ice Cream Sandwich", "Jelly Bean", "Marshmallow"],
-  },
-  {
-    category: "Science: Computers",
-    type: "multiple",
-    difficulty: "easy",
-    question: "On Twitter, what is the character limit for a Tweet?",
-    correct_answer: "140",
-    incorrect_answers: ["120", "160", "100"],
-  },
-  {
-    category: "Science: Computers",
-    type: "boolean",
-    difficulty: "easy",
-    question: "Linux was first created as an alternative to Windows XP.",
-    correct_answer: "False",
-    incorrect_answers: ["True"],
-  },
-  {
-    category: "Science: Computers",
-    type: "multiple",
-    difficulty: "easy",
-    question:
-      "Which programming language shares its name with an island in Indonesia?",
-    correct_answer: "Java",
-    incorrect_answers: ["Python", "C", "Jakarta"],
-  },
-];
+import { questions } from "./array.js";
 
-window.addEventListener("load", function () {
-  // Bottone di prova per il timer
-  let button = document.querySelector("#contoRovescia");
-  button.addEventListener("click", () => updateTimer());
-  // Fine bottone di prova
-});
+let indexDellaDomanda = 0;
+let punteggio = 0;
+const domanda = document.getElementById("domanda-che-cambia");
+const divBottoni = document.getElementsByClassName("bottoni")[0];
+const numeroDomanda = document.getElementById("numero_domanda");
 
-// Funzione per fare il conto alla rovescia
-function updateTimer() {
-  let tempo = 30;
-  // Provo a iniettare il conto nel body
-  let container = document.querySelector("body");
-  let elemento = document.createElement("p");
-  const timerId = setInterval(() => {
-    console.log(tempo);
-    elemento.textContent = tempo;
-    tempo--;
-    if (tempo < 0) {
-      clearInterval(timerId);
-      console.log("Timer scaduto!");
+cambiaDomande();
+
+function cambiaDomande() {
+    // inserisco nel <h1 id="domanda-che-cambia"> il testo della domanda corrente.
+    domanda.innerHTML = questions[indexDellaDomanda].question;
+
+    // creo un array di stringhe con le risposte (sbagliate + quella giusta).
+    const opzioni = questions[indexDellaDomanda].incorrect_answers;
+    opzioni.push(questions[indexDellaDomanda].correct_answer);
+
+    // pulisco il div nel quale inserirò i bottoni.
+    // (perchè a partire dalla seconda domanda sarà
+    // popolato con i bottoni della domanda precedente).
+    divBottoni.innerHTML = "";
+
+    // ciclo l'array con le possibili risposte
+    for (let opzione of opzioni) {
+        // per ogni risposta creo un bottone
+        const button = document.createElement("button");
+        // inserisco il testo del bottone
+        button.innerHTML = opzione;
+        // agiungo un event listener al click
+        button.addEventListener("click", () => handleClick(button));
+        // inserisco il bottone creato nel div
+        divBottoni.appendChild(button);
     }
-  }, 1000);
-  container.appendChild(elemento);
+}
+
+/**
+ * controlla se siamo arrivati alla fine delle domande,
+ * e se la risposta è giusta incrementa il punteggio,
+ * passa alla domanda successiva,
+ * altrimenti passa alla pagina del punteggio finale
+ * @param {HTMLButtonElement} button
+ */
+function handleClick(button) {
+    if (indexDellaDomanda < questions.length) {
+        if (button.innerText === questions[indexDellaDomanda].correct_answer) {
+            punteggio++;
+        }
+        indexDellaDomanda++;
+        if (indexDellaDomanda < questions.length) {
+            cambiaDomande();
+            numeroDomanda.innerHTML = indexDellaDomanda + 1;
+        } else {
+            // mostrare punteggio finale
+        }
+    }
 }

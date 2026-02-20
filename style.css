@@ -22,7 +22,7 @@
 h1 {
     color: white;
     font-family: "Outfit";
-    font-size: 60px;
+    font-size: 40px;
     line-height: 55px;
 }
 
@@ -122,12 +122,13 @@ input[type="checkbox"] {
     justify-content: center;
 }
 .bottoni {
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
     width: 100%;
-    align-items: center;
-    justify-content: center;
+    /* align-items: center;
+    justify-content: center; */
     gap: 20px;
+    width: fit-content;
 }
 .bottoni button {
     position: relative;
@@ -150,15 +151,12 @@ input[type="checkbox"] {
     inset: 0;
     border-radius: 9999px;
     padding: 2px; /* spessore bordo */
-
     background: linear-gradient(
         to bottom,
         white 0%,
         white 60%,
         rgba(255, 255, 255, 0) 100%
     );
-
-    /* Mostra solo il bordo */
     -webkit-mask:
         linear-gradient(#000 0 0) content-box,
         linear-gradient(#000 0 0);
